@@ -44,8 +44,10 @@ class EmailTemplate(defs.EmailTemplate):
         from_email=None,
         attachment_set=None,
         connection=None,
-        **ctx
+        ctx=None,
     ):
+        ctx = ctx or {}
+
         subject = render(self.subject, **ctx)
         body = render(self.body, **ctx)
 
