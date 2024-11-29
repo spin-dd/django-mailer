@@ -142,6 +142,6 @@ MEDIA_ROOT = str(STORAGE_DIR.path("media"))
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 INSTALLED_APPS += [
-    "ckeditor",
+    "django_ckeditor_5",
     "mailer",
 ]
