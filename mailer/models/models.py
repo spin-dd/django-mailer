@@ -1,33 +1,12 @@
 from django.db import models
-from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from django.core.mail import get_connection
+from . import defs
+from ..utils import render
+from .interface import MailAttachment, MailMessage
 
 
-class Timestamp(models.Model):
-    created_at = models.DateTimeField(
-        _("Created At"), help_text=_("Created At Help"), default=now
-    )
-    updated_at = models.DateTimeField(
-        _("Updated At"), help_text=_("Updated At Help"), auto_now=True
-    )
-
-    class Meta:
-        abstract = True
-
-
-class MailServer(Timestamp):
-    name = models.CharField("名称", max_length=100)
-    host = models.CharField("ホスト", max_length=100)
-    port = models.PositiveSmallIntegerField("ポート", default=25)
-    username = models.CharField(
-        "ユーザー名", max_length=100, default=None, blank=True, null=True
-    )
-    password = models.CharField(
-        "パスワード", max_length=100, default=None, blank=True, null=True
-    )
-    use_tls = models.BooleanField("TLS", default=False)
-    use_ssl = models.BooleanField("SSL", default=False)
+class MailServer(defs.MailServer):
 
     class Meta:
         verbose_name = "サーバー"
@@ -46,3 +25,49 @@ class MailServer(Timestamp):
             use_tls=self.use_tls,
             use_ssl=self.use_ssl,
         )
+
+
+class EmailTemplate(defs.EmailTemplate):
+    class Meta:
+        verbose_name = _("Email Template")
+        verbose_name_plural = _("Email Templates")
+
+    def __str__(self):
+        return self.title
+
+    def send(
+        self,
+        to=None,
+        cc=None,
+        bcc=None,
+        reply_to=None,
+        from_email=None,
+        attachment_set=None,
+        connection=None,
+        **ctx
+    ):
+        subject = render(self.subject, **ctx)
+        body = render(self.body, **ctx)
+
+        cc = cc or self.cc
+        bcc = bcc or self.bcc
+        cc = cc and cc.spit(",") or None
+        bcc = bcc and bcc.spit(",") or None
+
+        reply_to = reply_to or self.reply_to
+        from_email = from_email or self.from_email
+        attachment_set = (
+            isinstance(attachment_set, list)
+            and [MailAttachment(name=i[0], path=i[1]) for i in attachment_set]
+            or []
+        )
+
+        msg = MailMessage(
+            from_email=from_email,
+            to=to,
+            cc=cc,
+            bcc=bcc,
+            reply_to=reply_to,
+            attachment_set=attachment_set,
+        )
+        return msg.send(subject, body, html=True, connection=connection)

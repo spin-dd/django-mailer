@@ -9,3 +9,8 @@ class BaseAdmin(admin.ModelAdmin):
 @admin.register(models.MailServer)
 class MailServerAdmin(BaseAdmin):
     list_display = [f.name for f in models.MailServer._meta.fields]
+
+
+@admin.register(models.EmailTemplate)
+class MailServerAdmin(BaseAdmin):
+    list_display = [f.name for f in models.EmailTemplate._meta.fields]
