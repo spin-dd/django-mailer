@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Timestamp(models.Model):
@@ -65,7 +65,7 @@ class EmailBase(models.Model):
         max_length=140,
     )
 
-    body = RichTextField(
+    body = CKEditor5Field(
         verbose_name=_("Body"),
         blank=True,
         null=True,
