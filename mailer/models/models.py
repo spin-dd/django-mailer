@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+from django.core.mail import get_connection
 
 
 class Timestamp(models.Model):
@@ -18,7 +19,7 @@ class Timestamp(models.Model):
 class MailServer(Timestamp):
     name = models.CharField("名称", max_length=100)
     host = models.CharField("ホスト", max_length=100)
-    post = models.PositiveSmallIntegerField("ポート", default=25)
+    port = models.PositiveSmallIntegerField("ポート", default=25)
     username = models.CharField(
         "ユーザー名", max_length=100, default=None, blank=True, null=True
     )
@@ -34,3 +35,14 @@ class MailServer(Timestamp):
 
     def __str__(self):
         return self.name
+
+    def get_connection(self):
+        """接続"""
+        return get_connection(
+            host=self.host,
+            port=self.port,
+            username=self.username,
+            password=self.password,
+            use_tls=self.use_tls,
+            use_ssl=self.use_ssl,
+        )
