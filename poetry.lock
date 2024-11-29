@@ -133,6 +133,22 @@ folders-vx-6s8qx4z51pv2snps55k6zv100000gq-t-build-via-sdist-9fqb03nr-django-clic
 folders-vx-6s8qx4z51pv2snps55k6zv100000gq-t-build-via-sdist-9fqb03nr-django-click-2-4-0-requirements-test = ["coverage (<5)", "pytest", "pytest-cov", "pytest-django", "pytest-flake8"]
 
 [[package]]
+name = "django-environ"
+version = "0.11.2"
+description = "A package that allows you to utilize 12factor inspired environment variables to configure your Django application."
+optional = false
+python-versions = ">=3.6,<4"
+files = [
+    {file = "django-environ-0.11.2.tar.gz", hash = "sha256:f32a87aa0899894c27d4e1776fa6b477e8164ed7f6b3e410a62a6d72caaf64be"},
+    {file = "django_environ-0.11.2-py2.py3-none-any.whl", hash = "sha256:0ff95ab4344bfeff693836aa978e6840abef2e2f1145adff7735892711590c05"},
+]
+
+[package.extras]
+develop = ["coverage[toml] (>=5.0a4)", "furo (>=2021.8.17b43,<2021.9.dev0)", "pytest (>=4.6.11)", "sphinx (>=3.5.0)", "sphinx-notfound-page"]
+docs = ["furo (>=2021.8.17b43,<2021.9.dev0)", "sphinx (>=3.5.0)", "sphinx-notfound-page"]
+testing = ["coverage[toml] (>=5.0a4)", "pytest (>=4.6.11)"]
+
+[[package]]
 name = "django-js-asset"
 version = "2.2.0"
 description = "script tag with additional attributes for django.forms.Media"
@@ -619,4 +635,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "0407fa9b2a775b5a4f609fd3f3090a2e9d9bfcb2758c7f0c2e76bc176c793862"
+content-hash = "be57b8b87183c0156c1c513b6516514a68884ef035a32897f49b28ea94bb5302"
