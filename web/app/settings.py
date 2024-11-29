@@ -12,8 +12,24 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+import environ
+
+SETTINGS_DIR = environ.Path(__file__) - 1
+BASE_DIR = SETTINGS_DIR - 1
+PROJECT_DIR = SETTINGS_DIR - 2  #
+
+ENV = environ.Env()
+ENV.read_env(env_file=str(PROJECT_DIR.path(".env")))
+ENV.ENVIRON["SETTINGS_DIR"] = str(SETTINGS_DIR)
+ENV.ENVIRON["BASE_DIR"] = str(BASE_DIR)
+ENV.ENVIRON["PROJECT_DIR"] = str(PROJECT_DIR)
+
+STORAGE_DIR = environ.Path(ENV.str("STORAGE_DIR", default=str(BASE_DIR)))
+ENV.ENVIRON["STORAGE_DIR"] = str(STORAGE_DIR)
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -76,7 +92,7 @@ WSGI_APPLICATION = "app.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": Path(BASE_DIR) / "db.sqlite3",
     }
 }
 
@@ -116,6 +132,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+MEDIA_URL = "media/"
+STATIC_ROOT = str(STORAGE_DIR.path("static"))
+MEDIA_ROOT = str(STORAGE_DIR.path("media"))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -123,5 +142,6 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 INSTALLED_APPS += [
+    "django_ckeditor_5",
     "mailer",
 ]
