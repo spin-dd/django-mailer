@@ -1,0 +1,18 @@
+services:
+  mailer:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      args:
+        BASE: /home/app
+    working_dir: /home/app
+    volumes:
+      - .:/home/app
+    ports:
+      - "8000:8000"
+    command: python /home/app/web/manage.py runserver 0:8000
+    environment:
+      - DEBUG=True
+      - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
+      - DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL}
+      - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
