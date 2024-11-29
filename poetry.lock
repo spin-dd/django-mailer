@@ -33,6 +33,20 @@ astroid = ["astroid (>=1,<2)", "astroid (>=2,<4)"]
 test = ["astroid (>=1,<2)", "astroid (>=2,<4)", "pytest"]
 
 [[package]]
+name = "click"
+version = "8.1.7"
+description = "Composable command line interface toolkit"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "click-8.1.7-py3-none-any.whl", hash = "sha256:ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28"},
+    {file = "click-8.1.7.tar.gz", hash = "sha256:ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de"},
+]
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 description = "Cross-platform colored terminal text."
@@ -73,6 +87,24 @@ tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 [package.extras]
 argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
+
+[[package]]
+name = "django-click"
+version = "2.4.0"
+description = "Build Django management commands using the click CLI package."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django_click-2.4.0-py2.py3-none-any.whl", hash = "sha256:3c64a31cf25e54d3fccaea3af8d46d0b63511da2722e5888612aeee4d81e46d4"},
+    {file = "django_click-2.4.0.tar.gz", hash = "sha256:ef935b611040d123b60e88eb2952c4838b4538b14d248114128fcccb4418685d"},
+]
+
+[package.dependencies]
+click = ">=7.1"
+
+[package.extras]
+folders-vx-6s8qx4z51pv2snps55k6zv100000gq-t-build-via-sdist-9fqb03nr-django-click-2-4-0-requirements-dev = ["Fabric", "Sphinx", "check-manifest", "flake8", "livereload", "mccabe", "pep8", "pep8-naming", "pyflakes", "sphinx-autobuild", "sphinx-rtd-theme", "wheel"]
+folders-vx-6s8qx4z51pv2snps55k6zv100000gq-t-build-via-sdist-9fqb03nr-django-click-2-4-0-requirements-test = ["coverage (<5)", "pytest", "pytest-cov", "pytest-django", "pytest-flake8"]
 
 [[package]]
 name = "executing"
@@ -351,4 +383,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "89b0883810d62168943abf50b6e7bd86d00fb4eac4c6d617ec2465c979ec2af8"
+content-hash = "cbbed07ab2caa5e9f077d936a91c35c2fb4f9095d8c8af8ab83d2ad99ac8a9cd"
