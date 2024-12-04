@@ -18,6 +18,12 @@ DJANGO_SUPERUSER_PASSWORD=Aiy6mi3o
 docker compose up -d
 ~~~
 
+## テーブル作成
+
+```bash
+docker compose run --rm mailer python web/manage.py migrate
+```
+
 ## 管理者登録
 
 .envの `SUPERUSER` の内容で登録されます
