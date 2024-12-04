@@ -18,4 +18,3 @@ COPY web/ ${BASE}/web/
 RUN pip install --upgrade pip poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-dev
-RUN python web/manage.py migrate
