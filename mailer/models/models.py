@@ -1,13 +1,12 @@
-from django.db import models
-from django.utils.translation import gettext_lazy as _
 from django.core.mail import get_connection
-from . import defs
+from django.utils.translation import gettext_lazy as _
+
 from ..utils import render
+from . import defs
 from .interface import MailAttachment, MailMessage
 
 
 class MailServer(defs.MailServer):
-
     class Meta:
         verbose_name = "サーバー"
         verbose_name_plural = "サーバー"
@@ -59,9 +58,7 @@ class EmailTemplate(defs.EmailTemplate):
         reply_to = reply_to or self.reply_to
         from_email = from_email or self.from_email
         attachment_set = (
-            isinstance(attachment_set, list)
-            and [MailAttachment(name=i[0], path=i[1]) for i in attachment_set]
-            or []
+            isinstance(attachment_set, list) and [MailAttachment(name=i[0], path=i[1]) for i in attachment_set] or []
         )
 
         msg = MailMessage(

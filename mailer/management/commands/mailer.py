@@ -1,9 +1,8 @@
 from logging import getLogger
-import pandas as pd
 
 import djclick as click
+import pandas as pd
 from django.utils import translation
-from django.core.mail import EmailMessage, get_connection
 
 from ... import models
 

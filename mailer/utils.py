@@ -1,7 +1,7 @@
-from django.template import engines
-from django.utils.safestring import mark_safe
 from logging import getLogger
 
+from django.template import engines
+from django.utils.safestring import mark_safe
 
 logger = getLogger()
 
