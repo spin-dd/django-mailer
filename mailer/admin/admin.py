@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from .. import models
 
 
@@ -12,5 +13,5 @@ class MailServerAdmin(BaseAdmin):
 
 
 @admin.register(models.EmailTemplate)
-class MailServerAdmin(BaseAdmin):
+class EmailTemplateAdmin(BaseAdmin):
     list_display = [f.name for f in models.EmailTemplate._meta.fields]
