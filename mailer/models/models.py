@@ -52,13 +52,15 @@ class EmailTemplate(defs.EmailTemplate):
 
         cc = cc or self.cc
         bcc = bcc or self.bcc
-        cc = cc and cc.spit(",") or None
-        bcc = bcc and bcc.spit(",") or None
+        cc = cc and cc.split(",") or None
+        bcc = bcc and bcc.split(",") or None
 
         reply_to = reply_to or self.reply_to
         from_email = from_email or self.from_email
         attachment_set = (
-            isinstance(attachment_set, list) and [MailAttachment(name=i[0], path=i[1]) for i in attachment_set] or []
+            isinstance(attachment_set, list)
+            and [MailAttachment(name=i[0], path=i[1]) for i in attachment_set]
+            or []
         )
 
         msg = MailMessage(
